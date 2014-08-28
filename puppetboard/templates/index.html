@@ -95,7 +95,13 @@
                 {% endif %}
             </td>
             <td>
+              {% for f in [node.fact('aws_autoscaling_group_name')] %}
+              {% if f %}
+              <a href="{{url_for('node', node_name=node.name)}}">{{ f.value + '-' + node.name }}</a>
+              {% else %}
               <a href="{{url_for('node', node_name=node.name)}}">{{ node.name }}</a>
+              {% endif %}
+              {% endfor %}
             </td>
             <td>
               <a title="Latest Report" href="{{url_for('report_latest', node_name=node.name)}}">
